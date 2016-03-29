@@ -92,13 +92,6 @@
                     <li class="active">
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                    </li>
                     <li>
                         <a href="kavachhq"><i class="fa fa-fw fa-dashboard"></i> KavachHQ</a>
                     </li>
@@ -210,9 +203,15 @@
    <div id="page-wrapper">
    <br>
    <br>
-   <center> <p>Hello!
-    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-    to Continue</p></center>
+   
+   <div class="jumbotron">
+                    <h1>Hello,!</h1>
+                    <p>This tool is meant as the Final year Project for Sudharshun Ravichander- Masters Seeking Student at North Eastern Illinois Univesity 
+					This is the Login Screen for Unauthorized Users to Sign in. Well, I hate to do this to you,But I would miss a few points If I didnt have a sign in page & besides..The Project is to Provide a Monitoring Dashboard..So you get the idea.. .</p>
+                    <p><a href="<%= userService.createLoginURL(request.getRequestURI()) %>" class="btn btn-primary btn-lg" role="button">Sign in »</a>
+                    </p>
+    </div>
+   
  
    </div>
   <%} %>
