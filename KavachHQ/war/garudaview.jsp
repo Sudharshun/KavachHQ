@@ -155,13 +155,6 @@
                     <li class="active">
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                    </li>
                     <li>
                         <a href="kavachhq"><i class="fa fa-fw fa-dashboard"></i> KavachHQ</a>
                     </li>
