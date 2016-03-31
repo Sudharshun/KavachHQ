@@ -25,6 +25,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>com.kavach.neiu.sai.KavachHQServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Sanjaya</servlet-name>
+		<servlet-class>com.kavach.neiu.sai.SanjayaServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>Aswini</servlet-name>
 		<servlet-class>com.kavach.neiu.sai.AswiniServlet</servlet-class>
 	</servlet>
@@ -36,6 +41,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>KavachHQ</servlet-name>
 		<url-pattern>/kavachhq</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Sanjaya</servlet-name>
+		<url-pattern>kavachhq/sanjaya/*</url-pattern>
+	</servlet-mapping>
+	
 	<servlet-mapping>
     <servlet-name>Aswini</servlet-name>
     <url-pattern>/kavachhq/aswini/*</url-pattern>

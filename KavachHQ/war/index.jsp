@@ -92,15 +92,18 @@
                     <li class="active">
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
-                        <a href="kavachhq"><i class="fa fa-fw fa-dashboard"></i> KavachHQ</a>
-                    </li>
-                      <li>
+                     <li>
+                        <a href="sanjaya.jsp"><i class="fa fa-fw fa-dashboard"></i> Sanjaya</a>
+                     </li>
+                     <li >
+                        <a href="kavachhq/sanjaya/"><i class="fa fa-fw fa-dashboard"></i> Vayu</a>
+                     </li>
+                     <li>
                         <a href="kavachhq/aswini/"><i class="fa fa-fw fa-dashboard"></i> Aswini</a>
-                    </li>
+                     </li>
                       <li >
                         <a href="kavachhq/garuda/"><i class="fa fa-fw fa-dashboard"></i> Garuda</a>
-                    </li>
+                     </li>
                     <%}
 				%>
                 </ul>

@@ -63,8 +63,8 @@
         div: '#map',
         lat: -12.043333,
         lng: -77.028333,
-        width: '500px',
-        height: '500px'
+        width: '300px',
+        height: '300px'
       });
 
       GMaps.geolocate({
@@ -153,15 +153,18 @@
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="kavachhq"><i class="fa fa-fw fa-dashboard"></i> KavachHQ</a>
-                    </li>
+                        <a href="sanjaya.jsp"><i class="fa fa-fw fa-dashboard"></i> Sanjaya</a>
+                     </li>
+                     <li >
+                        <a href="kavachhq/sanjaya/"><i class="fa fa-fw fa-dashboard"></i> Vayu</a>
+                     </li>
                       <li class="active">
                         <a href="kavachhq/aswini/"><i class="fa fa-fw fa-dashboard"></i> Aswini</a>
                     </li>
                       <li >
                         <a href="kavachhq/garuda/"><i class="fa fa-fw fa-dashboard"></i> Garuda</a>
                     </li>
-                    <%}
+                     <%}
 				%>
                 </ul>
             </div>
@@ -226,7 +229,7 @@
                                             </tr>
                                         </thead>
                                          <tbody>
-                                        	<tr><td>Name of User:</td><td><input class="form-control" type="text" name="username" id="username" value=""></td></tr>
+                                        	<tr><td>Name of User:</td><td><input class="form-control" type="text" name="username" id="username" value="<%=user.getNickname()%>"></td></tr>
 										    <tr><td>Latitude:</td><td><input class="form-control" type="text" name ="latitude" id="latitude" value=""></td></tr>
 								  			<tr><td>Longitude:</td><td><input class="form-control" type="text" name="longitude" id="longitude" value=""></td></tr>
 								 			<tr><td>Health Status:</td><td><input class="form-control" type="text" name="healthstatus" id="healthstatus" value=""></td></tr>

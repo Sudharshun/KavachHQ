@@ -7,7 +7,11 @@
 <%-- //[START imports]--%>
 <%-- //[START imports]--%>
 <%@ page import="com.kavach.neiu.sai.Logbook" %>
-<%@ page import="com.kavach.neiu.sai.Checkin" %>
+<%-- //[START imports]--%>
+<%@ page import="com.kavach.neiu.sai.Message" %>
+<%@ page import="com.kavach.neiu.sai.Messagebook" %>
+<%-- //[END imports]--%>
+
 <%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
 <%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
@@ -32,8 +36,6 @@
    <title>KavachHQ- Protecting the Protectors</title>
   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzpWuyrKMvV38dZEjt81rLtq9mw4DlwuA"></script>
-  <script type="text/javascript" src="js/gmaps.min.js"></script>
   
   <!-- Theme -->
    <!-- Bootstrap Core CSS -->
@@ -56,47 +58,6 @@
   <!-- Theme end -->
   
   
- <script type="text/javascript">
-    var map;
-    var latitude;
-    var longitude;
-    $(document).ready(function(){
-      var map = new GMaps({
-        div: '#map',
-        lat: -12.043333,
-        lng: -77.028333,
-        width: '300px',
-        height: '300px'
-      });
-
-      GMaps.geolocate({
-        success: function(position){
-          map.setCenter(position.coords.latitude, position.coords.longitude);
-          map.addMarker({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              title: 'You',
-              click: function(e) {
-                console.log('You clicked in this marker');
-              },
-              infoWindow: {
-                  content: '<p>You are here!</p>'
-                }
-        });
-          
-        },
-        error: function(error){
-          alert('Geolocation failed: '+error.message);
-        },
-        not_supported: function(){
-          alert("Your browser does not support geolocation");
-        },
-        always: function(){
-          console.log("Done!");
-        }
-      });
-    });
-  </script>
 </head>
 
 <body>
@@ -155,19 +116,20 @@
                     <li>
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                     <li>
+                    <li>
                         <a href="sanjaya.jsp"><i class="fa fa-fw fa-dashboard"></i> Sanjaya</a>
                      </li>
-                     <li >
+                     <li  class="active">
                         <a href="kavachhq/sanjaya/"><i class="fa fa-fw fa-dashboard"></i> Vayu</a>
                      </li>
                      
                       <li>
                         <a href="kavachhq/aswini/"><i class="fa fa-fw fa-dashboard"></i> Aswini</a>
                     </li>
-                      <li class="active">
+                      <li>
                         <a href="kavachhq/garuda/"><i class="fa fa-fw fa-dashboard"></i> Garuda</a>
                     </li>
+                   
                     <%}
 				%>
                 </ul>
@@ -184,41 +146,28 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Garuda
-                            <small>Situational Awareness/Insights</small>
+                            Vayu
+                            <small>HUD Messages</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Garuda
+                                <i class="fa fa-file"></i> Vayu
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
 				<div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-						<!-- Panel Heading -->
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i>Garuda Insight</h3>
-                            </div>
-						<!-- Panel Heading -->
-                            <div class="panel-body">
-								<!-- Panel Content -->
-                                 <div id="map"></div>
-                               <!-- Panel Content -->
-                            </div>
-                        </div>
-                    </div>
+                    
 				<!-- Panel Heading -->	
 				 <div class="col-lg-8">
                         <div class="panel panel-default">
 						<!-- Panel Heading -->
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Garuda View</h3>
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Vayu View</h3>
                             </div>
 						<!-- Panel Heading -->
                             <div class="panel-body">
@@ -228,7 +177,7 @@
   
 											DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 											//Use class Query to assemble a query
-											Query q = new Query("Checkin");
+											Query q = new Query("Message");
 											
 											//Use PreparedQuery interface to retrieve results
 											PreparedQuery pq = datastore.prepare(q);
@@ -241,10 +190,9 @@
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Cop</th>
-                                                <th>Latitude</th>
-                                                <th>Longitude</th>
-                                                <th>Health Status</th>
+                                                <th>Meant for</th>
+                                                <th>Content</th>
+                                                <th>From</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -252,16 +200,13 @@
                                         <% 		
 											for (Entity result : pq.asIterable()) {
 											String author_id = (String) result.getProperty("author_id");
-											String healthstatus = (String) result.getProperty("healthstatus");
-											String latitude = (String) result.getProperty("latitude");
-											String longitude = (String) result.getProperty("longitude");
-											System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
+											String content = (String) result.getProperty("content");
+											String meantfor = (String) result.getProperty("meant_for");
 											%>
 											  <tr>
                                                 <td><%=author_id %></td>
-                                                <td><%=latitude %></td>
-                                                <td><%=longitude %></td>
-                                                <td><%=healthstatus%></td>
+                                                <td><%=content%></td>
+                                                <td><%=meantfor%></td>
                                             </tr>
 											<%
 											}

@@ -6,8 +6,8 @@
 
 <%-- //[START imports]--%>
 <%-- //[START imports]--%>
-<%@ page import="com.kavach.neiu.sai.Logbook" %>
-<%@ page import="com.kavach.neiu.sai.Checkin" %>
+<%@ page import="com.kavach.neiu.sai.Message" %>
+<%@ page import="com.kavach.neiu.sai.Messagebook" %>
 <%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
 <%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
@@ -29,11 +29,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-   <title>KavachHQ- Protecting the Protectors</title>
+   <title>KavachHQ- Sanjaya</title>
   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
   <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzpWuyrKMvV38dZEjt81rLtq9mw4DlwuA"></script>
-  <script type="text/javascript" src="js/gmaps.min.js"></script>
   
   <!-- Theme -->
    <!-- Bootstrap Core CSS -->
@@ -54,57 +52,13 @@
   
   
   <!-- Theme end -->
-  
-  
- <script type="text/javascript">
-    var map;
-    var latitude;
-    var longitude;
-    $(document).ready(function(){
-      var map = new GMaps({
-        div: '#map',
-        lat: -12.043333,
-        lng: -77.028333,
-        width: '300px',
-        height: '300px'
-      });
-
-      GMaps.geolocate({
-        success: function(position){
-          map.setCenter(position.coords.latitude, position.coords.longitude);
-          map.addMarker({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              title: 'You',
-              click: function(e) {
-                console.log('You clicked in this marker');
-              },
-              infoWindow: {
-                  content: '<p>You are here!</p>'
-                }
-        });
-          
-        },
-        error: function(error){
-          alert('Geolocation failed: '+error.message);
-        },
-        not_supported: function(){
-          alert("Your browser does not support geolocation");
-        },
-        always: function(){
-          console.log("Done!");
-        }
-      });
-    });
-  </script>
-</head>
+ </head>
 
 <body>
-
 <%
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
-%>   
+%>
 <!-- Begin of Body Content -->
  <div id="wrapper">
 
@@ -152,22 +106,22 @@
                 <ul class="nav navbar-nav side-nav">
                    <% if (user != null) {
      						%>
-                    <li>
+                    <li >
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                     <li>
+                    <li  class="active">
                         <a href="sanjaya.jsp"><i class="fa fa-fw fa-dashboard"></i> Sanjaya</a>
                      </li>
                      <li >
                         <a href="kavachhq/sanjaya/"><i class="fa fa-fw fa-dashboard"></i> Vayu</a>
-                     </li>
-                     
+                     </li>  
                       <li>
                         <a href="kavachhq/aswini/"><i class="fa fa-fw fa-dashboard"></i> Aswini</a>
                     </li>
-                      <li class="active">
+                      <li >
                         <a href="kavachhq/garuda/"><i class="fa fa-fw fa-dashboard"></i> Garuda</a>
                     </li>
+                     
                     <%}
 				%>
                 </ul>
@@ -184,94 +138,54 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Garuda
-                            <small>Situational Awareness/Insights</small>
+                            Sanjaya
+                            <small>Real time Battlefiedl Intelligence</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Garuda
+                                <i class="fa fa-file"></i> Sanjaya
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
 				<div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-						<!-- Panel Heading -->
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i>Garuda Insight</h3>
-                            </div>
-						<!-- Panel Heading -->
-                            <div class="panel-body">
-								<!-- Panel Content -->
-                                 <div id="map"></div>
-                               <!-- Panel Content -->
-                            </div>
-                        </div>
-                    </div>
-				<!-- Panel Heading -->	
+                <!-- Panel Heading -->	
 				 <div class="col-lg-8">
                         <div class="panel panel-default">
 						<!-- Panel Heading -->
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Garuda View</h3>
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Sanjaya- Real time input</h3>
                             </div>
 						<!-- Panel Heading -->
                             <div class="panel-body">
-								<!-- Panel Content -->
-								 <%-- //[START datastore]--%>
-									<%
-  
-											DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-											//Use class Query to assemble a query
-											Query q = new Query("Checkin");
-											
-											//Use PreparedQuery interface to retrieve results
-											PreparedQuery pq = datastore.prepare(q);
-									%>
-									
-									
-								<%-- //[END datastore]--%>
-								
-                                <div class="table-responsive">
+                             <%-- //[START datastore]--%>
+								<form action="kavachhq/sanjaya/" method="post">
+								<div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Cop</th>
-                                                <th>Latitude</th>
-                                                <th>Longitude</th>
-                                                <th>Health Status</th>
+                                                <th>Parameter</th>
+                                                <th>Value</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        <!-- Table Content -->
-                                        <% 		
-											for (Entity result : pq.asIterable()) {
-											String author_id = (String) result.getProperty("author_id");
-											String healthstatus = (String) result.getProperty("healthstatus");
-											String latitude = (String) result.getProperty("latitude");
-											String longitude = (String) result.getProperty("longitude");
-											System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
-											%>
-											  <tr>
-                                                <td><%=author_id %></td>
-                                                <td><%=latitude %></td>
-                                                <td><%=longitude %></td>
-                                                <td><%=healthstatus%></td>
-                                            </tr>
-											<%
-											}
-											%>
-                                         <!-- Table Content -->  
-                                        </tbody>
+                                         <tbody>
+                                        	<tr><td>Message From:</td><td><input class="form-control" type="text" name="messagefrom" id="messagefrom" value="<%=user.getNickname()%>"></td></tr>
+										    <tr><td>Content:</td><td><input class="form-control" type="text" name ="messagecontent" id="messagecontent" value=""></td></tr>
+								  			<tr><td>Message For:</td><td><input class="form-control" type="text" name="messagefor" id="messagefor" value=""></td></tr>
+								 			<tr><td colspan="2"><div><button type="submit"  class="btn btn-primary">Inform</button></div></td></tr>
+								    	 </tbody>
                                     </table>
 									<!-- Panel Content -->
                                 </div>
-                            </div>
+								</form>
+                            
+								<!-- Panel Content -->
+															
+                                
                         </div>
                     </div>
                 </div>
@@ -299,7 +213,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 <!-- End of Body Content -->    
- 
+
+<!-- Start old code -->
+<%-- //[END datastore]--%>
 </body>
 </html>
 <%-- //[END all]--%>

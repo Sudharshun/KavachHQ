@@ -1,40 +1,43 @@
 package com.kavach.neiu.sai;
 
 import java.io.IOException;
-import javax.servlet.http.*;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.ObjectifyService;
 
-public class AswiniServlet extends HttpServlet {
+public class SanjayaServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-		Checkin checkin;
-		
-		String userName="";
-		String latitude="";
-		String longitude="";
-		String healthstatus="";
-		String responseTxt="Bad response";
-	   userName=req.getParameter("username");
-	   latitude=req.getParameter("latitude");
-	   longitude=req.getParameter("longitude");
-	   healthstatus=req.getParameter("healthstatus");
-	
-	    	checkin = new Checkin("kavachchkn", latitude,longitude,healthstatus,userName,"sai");
-	   
+		 Message messageToStore;
 
+		String messagefrom="";
+		String messagecontent="";
+		String messagefor="";
+	
+		String responseTxt="Bad response";
+		messagefrom=req.getParameter("messagefrom");
+		messagecontent=req.getParameter("messagecontent");
+		messagefor=req.getParameter("messagefor");
+		
+	   
+	     	messageToStore = new Message("sai", messagecontent, messagefrom,"sai" ,messagefor);
+	 	   
 	    // Use Objectify to save the greeting and now() is used to make the call synchronously as we
 	    // will immediately get a new page using redirect and we want the data to be present.
 	   
-	responseTxt="Username:"+userName+",Latitude/Longitude:"+latitude+":"+longitude+",Healthstatus:"+healthstatus+" Saved!!!";
+	responseTxt="From :"+messagefrom+",For :"+messagefor+", Content: "+messagecontent+" Saved!!!";
 	
   
-   ObjectifyService.ofy().save().entity(checkin).now();
+   ObjectifyService.ofy().save().entity(messageToStore).now();
 	
 	resp.getWriter().println(responseTxt);
+	
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -44,9 +47,9 @@ public class AswiniServlet extends HttpServlet {
 	    User user = userService.getCurrentUser();  // Find out who the user is.
    
 	 if(user!=null){
-	    resp.sendRedirect("/aswinikumara.jsp?userName=" + user.getUserId());
+	    resp.sendRedirect("/vayuview.jsp?userName=" + user.getUserId());
 	 }else{
-		    resp.sendRedirect("/aswinikumara.jsp");
+		    resp.sendRedirect("/vayuview.jsp");
 			
 	 }
 	 

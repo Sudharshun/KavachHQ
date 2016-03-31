@@ -21,7 +21,7 @@ public class KavachHQServlet extends HttpServlet {
 	    String meantfor = req.getParameter("meantfor");
 	    
 	    if (user != null) {
-	    	messageToStore = new Message(messagebookName, content, user.getUserId(), user.getEmail(),meantfor);
+	    	messageToStore = new Message(messagebookName, content, user.getNickname(), user.getEmail(),meantfor);
 	    } else {
 	    	messageToStore = new Message(messagebookName, content);
 	    }
