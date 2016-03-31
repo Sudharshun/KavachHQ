@@ -152,7 +152,7 @@
                 <ul class="nav navbar-nav side-nav">
                    <% if (user != null) {
      						%>
-                    <li class="active">
+                    <li>
                         <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
@@ -161,7 +161,7 @@
                       <li>
                         <a href="kavachhq/aswini/"><i class="fa fa-fw fa-dashboard"></i> Aswini</a>
                     </li>
-                      <li >
+                      <li class="active">
                         <a href="kavachhq/garuda/"><i class="fa fa-fw fa-dashboard"></i> Garuda</a>
                     </li>
                     <%}
