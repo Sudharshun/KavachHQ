@@ -5,6 +5,22 @@
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%-- //[START imports]--%>
+<%-- //[START imports]--%>
+<%@ page import="com.kavach.neiu.sai.Logbook" %>
+<%@ page import="com.kavach.neiu.sai.Checkin" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
+<%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.datastore.Entity" %>
+<%@ page import="com.google.appengine.api.datastore.Key" %>
+<%@ page import="com.google.appengine.api.datastore.PreparedQuery" %>
+<%@ page import="com.google.appengine.api.datastore.Query" %>
+<%-- //[END imports]--%>
+
+<%-- //[END imports]--%>
+
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en">
 
 <head>
@@ -16,7 +32,10 @@
     <meta name="author" content="Sudharshun Ravichander">
 
     <title>KavachHQ- Protecting the Protectors</title>
-
+	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+  	<script type="text/javascript" src="js/jquery.min.js"></script>
+  	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzpWuyrKMvV38dZEjt81rLtq9mw4DlwuA"></script>
+  	<script type="text/javascript" src="js/gmaps.min.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -131,6 +150,27 @@
                     </div>
                 </div>
                 <div class="row">
+                 <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-crosshairs fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">Sanjaya</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="sanjaya.jsp">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -143,7 +183,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="kavachhq">
+                            <a href="kavachhq/sanjaya/">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -196,7 +236,30 @@
                     </div>
                 </div>
                 <!-- /.row -->
+				<!-- Map Area -->
+    <!-- /.row -->
+				<div class="row">
+               <!-- Panel Heading -->	
+				 <div style="width:100%;">
+                        <div class="panel panel-default">
+						<!-- Panel Heading -->
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Garuda View</h3>
+                            </div>
+						<!-- Panel Heading -->
+                            <div class="panel-body">
+							        <!-- Panel Content -->
+                                		 <div id="map"></div>
+                               		<!-- Panel Content -->
+									<!-- Panel Content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
 
+				<!-- Map Area -->
             </div>
             <!-- /.container-fluid -->
 
@@ -233,5 +296,48 @@
     <script src="js/plugins/morris/morris-data.js"></script>
 
 </body>
+<script>
+map = new GMaps({
+    div: '#map',
+    lat: 42.0441447,
+    lng: -87.8533265,
+    width: '100%',
+    height: '400px'
+  });
+<%-- //[START datastore]--%>
+		<%
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		//Use class Query to assemble a query
+		Query q = new Query("Checkin");
+		
+		//Use PreparedQuery interface to retrieve results
+		PreparedQuery pq = datastore.prepare(q);
+			for (Entity result : pq.asIterable()) {
+			String author_id = (String) result.getProperty("author_id");
+			String healthstatus = (String) result.getProperty("healthstatus");
+			String latitude = (String) result.getProperty("latitude");
+			String longitude = (String) result.getProperty("longitude");
+			System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
+			%>
+			
+			map.addMarker({
+				  lat: <%=latitude%>,
+				  lng: <%=longitude%>,
+				  title: '<%=author_id%>',
+				  click: function(e) {
+				    alert('This is <%=author_id%>');
+				  },
+				  infoWindow: {
+					  content: '<p><%=author_id%></p>'
+				  }
+				});
+			<%
+			}
+			%>
 
+
+<%-- //[END datastore]--%>
+
+
+</script>
 </html>

@@ -69,8 +69,8 @@ public class Checkin {
     	theLogBook = Key.create(Logbook.class, "default");
     }
     this.latitude = latitude;
-    this.longitude = latitude;
-    this.healthstatus = latitude;
+    this.longitude = longitude;
+    this.healthstatus = healthstatus;
     
   }
 
@@ -79,7 +79,7 @@ public class Checkin {
    **/
   public Checkin(String bookName, String latitude,String longitude,String healthstatus,String userName,String email) {
     this(bookName, latitude,longitude,healthstatus);
-    author_id = email;
+    author_email = email;
     author_id = userName;
   }
 
