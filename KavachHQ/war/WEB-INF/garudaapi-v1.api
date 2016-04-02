@@ -26,21 +26,6 @@
     "maxAge" : 0
   },
   "methods" : {
-    "garudaapi.garudaapi.getcheckins" : {
-      "path" : "container",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kavach.neiu.sai.GarudaEndpoint.getThing",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "garudaapi.garudaapi.addcheckin" : {
       "path" : "putThing/{aid}/{aemail}/{hs}/{lat}/{longt}",
       "httpMethod" : "post",
@@ -77,6 +62,21 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "garudaapi.garudaapi.getcheckins" : {
+      "path" : "container",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kavach.neiu.sai.GarudaEndpoint.getThing",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -92,12 +92,12 @@
       }
     },
     "methods" : {
-      "com.kavach.neiu.sai.GarudaEndpoint.getThing" : {
+      "com.kavach.neiu.sai.GarudaEndpoint.putThing" : {
         "response" : {
           "$ref" : "Container"
         }
       },
-      "com.kavach.neiu.sai.GarudaEndpoint.putThing" : {
+      "com.kavach.neiu.sai.GarudaEndpoint.getThing" : {
         "response" : {
           "$ref" : "Container"
         }

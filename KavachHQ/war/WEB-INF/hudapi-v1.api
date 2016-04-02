@@ -1,0 +1,99 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://kavachhq.appspot.com/_ah/api",
+  "name" : "hudapi",
+  "version" : "v1",
+  "description" : "An API to manage HUD Messages Info",
+  "defaultVersion" : false,
+  "discovery" : [ "PUBLIC" ],
+  "adapter" : {
+    "bns" : "https://kavachhq.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "hudapi.hudapi.addmessage" : {
+      "path" : "putHUDThing/{aid}/{content}/{meantfor}",
+      "httpMethod" : "post",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kavach.neiu.sai.HudEndpoint.putHUDThing",
+      "request" : {
+        "parameters" : {
+          "aid" : {
+            "type" : "string",
+            "required" : true
+          },
+          "content" : {
+            "type" : "string",
+            "required" : true
+          },
+          "meantfor" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "hudapi.hudapi.getmessages" : {
+      "path" : "container",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kavach.neiu.sai.HudEndpoint.getHUDThing",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Container" : {
+        "id" : "Container",
+        "type" : "object",
+        "properties" : {
+          "Text" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.kavach.neiu.sai.HudEndpoint.putHUDThing" : {
+        "response" : {
+          "$ref" : "Container"
+        }
+      },
+      "com.kavach.neiu.sai.HudEndpoint.getHUDThing" : {
+        "response" : {
+          "$ref" : "Container"
+        }
+      }
+    }
+  }
+}
