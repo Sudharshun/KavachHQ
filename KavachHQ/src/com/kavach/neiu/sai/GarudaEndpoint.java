@@ -26,13 +26,13 @@ Query q = new Query("Checkin");
 //Use PreparedQuery interface to retrieve results
 PreparedQuery pq = datastore.prepare(q);
 
-String response="Result-";
+String response="";
 for (Entity result : pq.asIterable()) {
 String author_id = (String) result.getProperty("author_id");
 String healthstatus = (String) result.getProperty("healthstatus");
 String latitude = (String) result.getProperty("latitude");
 String longitude = (String) result.getProperty("longitude");
-response=response+"["+author_id+","+healthstatus+","+latitude+","+longitude+"],";
+response=response+"["+author_id+","+healthstatus+","+latitude+","+longitude+"]|";
 System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
 
 }

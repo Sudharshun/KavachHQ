@@ -25,12 +25,12 @@ public class HudEndpoint {
 		//Use PreparedQuery interface to retrieve results
 		PreparedQuery pq = datastore.prepare(q);
 
-		String response="Result-";
+		String response="";
 		for (Entity result : pq.asIterable()) {
 			String author_id = (String) result.getProperty("author_id");
 			String content = (String) result.getProperty("content");
 			String meantfor = (String) result.getProperty("meant_for");
-			response=response+"["+author_id+":"+author_id+",content:"+content+",meantfor:"+meantfor+"],";
+			response=response+"[From:"+author_id+",content:"+content+",meantfor:"+meantfor+"]|";
 		}
 	  System.out.println("-->"+response);
 	  c.Text =response;
