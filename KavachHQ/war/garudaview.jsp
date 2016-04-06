@@ -257,7 +257,7 @@
 											String longitude = (String) result.getProperty("longitude");
 											System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
 											%>
-											  <tr>
+											  <tr  class="clickable-row" data-url="dhanvantri.jsp?injuryCd=<%=healthstatus%>">
                                                 <td><%=author_id %></td>
                                                 <td><%=latitude %></td>
                                                 <td><%=longitude %></td>
@@ -299,7 +299,13 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 <!-- End of Body Content -->    
- 
+  <script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.document.location = $(this).data("url");
+        });
+    }); 
+    </script>
 </body>
 </html>
 <%-- //[END all]--%>

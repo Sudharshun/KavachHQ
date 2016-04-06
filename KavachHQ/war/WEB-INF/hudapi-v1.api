@@ -26,21 +26,6 @@
     "maxAge" : 0
   },
   "methods" : {
-    "hudapi.hudapi.getmessages" : {
-      "path" : "container",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kavach.neiu.sai.HudEndpoint.getHUDThing",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "hudapi.hudapi.addmessage" : {
       "path" : "putHUDThing/{aid}/{content}/{meantfor}",
       "httpMethod" : "post",
@@ -69,6 +54,21 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "hudapi.hudapi.getmessages" : {
+      "path" : "container",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kavach.neiu.sai.HudEndpoint.getHUDThing",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -84,12 +84,12 @@
       }
     },
     "methods" : {
-      "com.kavach.neiu.sai.HudEndpoint.getHUDThing" : {
+      "com.kavach.neiu.sai.HudEndpoint.putHUDThing" : {
         "response" : {
           "$ref" : "Container"
         }
       },
-      "com.kavach.neiu.sai.HudEndpoint.putHUDThing" : {
+      "com.kavach.neiu.sai.HudEndpoint.getHUDThing" : {
         "response" : {
           "$ref" : "Container"
         }

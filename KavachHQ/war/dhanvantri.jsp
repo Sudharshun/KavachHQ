@@ -1,6 +1,8 @@
 <%-- //[START all]--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -31,7 +33,7 @@
     <meta name="description" content="KavachH1">
     <meta name="author" content="Sudharshun Ravichander">
 
-    <title>KavachHQ- Protecting the Protectors</title>
+    <title>KavachHQ- Dhanvantri</title>
 	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
   	<script type="text/javascript" src="js/jquery.min.js"></script>
   	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzpWuyrKMvV38dZEjt81rLtq9mw4DlwuA"></script>
@@ -54,6 +56,30 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+    div.humanHealth {
+  	 width:320px; /*width of your image*/
+  	 height:726px; /*height of your image*/
+ 	 background-image:url('img/Human.png');
+  	 margin:0; /* If you want no margin */
+   	padding:0; /*if your want to padding */
+}
+    #markerH{ 
+    position: relative;
+    top:70px;
+    left:50px;
+    width: 50px;
+    height: 50px;
+    background: orange;
+    border: 1px solid red;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    border-radius: 50%;
+    behavior: url(PIE.htc);
+	}
+    
+    </style>
+
 </head>
 
 <body>
@@ -63,6 +89,98 @@
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
 %>   
+<%
+	String topV="230px";
+	String leftV="100px";
+	String alertLevel="Safe!!";
+	String alertMessage="Person is not at Risk!";
+
+    String injuryCd = request.getParameter("injuryCd");
+    if (injuryCd == null) {
+    	injuryCd = "Sucess!!";
+    }
+    
+    if(null!=injuryCd&&!injuryCd.trim().equalsIgnoreCase("")){
+    	if(injuryCd.equalsIgnoreCase("HEAD")){
+    		topV="10px";
+    		leftV="130px";	
+    		 alertLevel="Critical!!";
+    		 alertMessage="Person is at Risk.Evacuate Immediately. Criticality Window :15 Mins";
+    	}
+    	if(injuryCd.equalsIgnoreCase("NECK")){
+    		topV="70px";
+    		leftV="130px";	
+	   		 alertLevel="Danger!!";
+			 alertMessage="Person is at Risk.Evacuate Immediately. Criticality Window :45 Mins";
+	}
+    	if(injuryCd.equalsIgnoreCase("CHEST")){
+    		topV="130px";
+    		leftV="130px";	
+   			 alertLevel="Elevated Risk!!";
+			 alertMessage="Person is at Risk.Evacuate Immediately. Criticality Window :35 Mins";
+
+    	}
+    	if(injuryCd.equalsIgnoreCase("HEART")){
+    		topV="150px";
+    		leftV="160px";	
+   		 alertLevel="Super Critical!!";
+		 alertMessage="Person is at Risk.Evacuate Immediately. Criticality Window :5 Mins";
+		}
+    	if(injuryCd.equalsIgnoreCase("CHEST RIGHT")){
+    		topV="150px";
+    		leftV="120px";	
+   		 alertLevel="Critical!!";
+		 alertMessage="Person is at Risk.Evacuate Immediately. Criticality Window :15 Mins";
+
+    	}
+    	if(injuryCd.equalsIgnoreCase("LEFT HAND")){
+    		topV="160px";
+    		leftV="200px";	
+    		 alertLevel="At Risk!!";
+    		 alertMessage="Person is at Risk.Evacuate Soon.Torniquet to Prevent Bleeding. Criticality Window :75 Mins";
+	}
+    	if(injuryCd.equalsIgnoreCase("RIGHT HAND")){
+    		topV="160px";
+    		leftV="70px";	
+    		 alertLevel="At Risk!!";
+    		 alertMessage="Person is at Risk.Evacuate Soon.Torniquet to Prevent Bleeding. Criticality Window :75 Mins";
+	 	}
+    	if(injuryCd.equalsIgnoreCase("TORSO")){
+    		topV="250px";
+    		leftV="130px";	
+    		 alertLevel="At Risk!!";
+    		 alertMessage="Person is at Risk.Evacuate Soon. Criticality Window :75 Mins";
+		}
+    	if(injuryCd.equalsIgnoreCase("STOMACH")){
+    		topV="300px";
+    		leftV="130px";	
+    		 alertLevel="At Risk!!";
+    		 alertMessage="Person is at Risk.Evacuate Soon. Criticality Window :75 Mins";
+		}
+    	if(injuryCd.equalsIgnoreCase("ABDOMEN")){
+    		topV="350px";
+    		leftV="130px";	
+      		 alertLevel="Critical!!";
+    		 alertMessage="Person is at Risk.Evacuate Immediately. Criticality Window :15 Mins";
+    	}
+    	if(injuryCd.equalsIgnoreCase("LEFT LEG")){
+    		topV="430px";
+    		leftV="105px";	
+   		 alertLevel="At Risk!!";
+		 alertMessage="Person is at Risk.Evacuate Soon.Torniquet to Prevent Bleeding. Criticality Window :75 Mins";
+	}
+    	if(injuryCd.equalsIgnoreCase("RIGHT LEG")){
+    		topV="430px";
+    		leftV="177px";	
+   		 alertLevel="At Risk!!";
+		 alertMessage="Person is at Risk.Evacuate Soon.Torniquet to Prevent Bleeding. Criticality Window :75 Mins";
+    	}
+    	
+    	
+    }
+    
+    
+    %>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -139,7 +257,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Kavach Dashboard <small> Overview</small>
+                            Kavach Dashboard <small> Dhanvantri</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
@@ -149,117 +267,26 @@
                     </div>
                 </div>
                 <div class="row">
-                 <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-crosshairs fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">Sanjaya</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="sanjaya.jsp">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">Vayu</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="kavachhq/sanjaya/">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">Aswini</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="kavachhq/aswini/">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">Garuda</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="kavachhq/garuda/">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                 <div class="jumbotron">
+                    <table>
+                    <tr><td style="vertical-align:top">
+                    <h1>Risk Level:<%=alertLevel%></h1>
+                    <p>The Data was Received from Integrated Kavach System</p>
+                    <p>The Injury Code from Body Armor was <%=injuryCd%></p>
+                    <p><h2><%=alertMessage%></h2></p>
+                    
+                    <p><a href="kavachhq/garuda/" class="btn btn-primary btn-lg" role="button">Back to Garuda</a>
+                    </p>
+                    </td>
+                    <td>
+                    <div class="humanHealth"><div id="markerH" style="top:<%=topV%>;left:<%=leftV%>;">&nbsp;</div></div>
+                    </td>
+                    </tr>
+                    </table>
+   				 </div>
                 </div>
                 <!-- /.row -->
-				<!-- Map Area -->
-    <!-- /.row -->
-				<div class="row">
-               <!-- Panel Heading -->	
-				 <div style="width:100%;">
-                        <div class="panel panel-default">
-						<!-- Panel Heading -->
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Garuda View</h3>
-                            </div>
-						<!-- Panel Heading -->
-                            <div class="panel-body">
-							        <!-- Panel Content -->
-                                		 <div id="map"></div>
-                               		<!-- Panel Content -->
-									<!-- Panel Content -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-				<!-- Map Area -->
-            </div>
+			</div>
             <!-- /.container-fluid -->
 
         </div>
@@ -275,7 +302,7 @@
 					This is the Login Screen for Unauthorized Users to Sign in. Well, I hate to do this to you,But I would miss a few points If I didnt have a sign in page & besides..The Project is to Provide a Monitoring Dashboard..So you get the idea.. .</p>
                     <p><a href="<%= userService.createLoginURL(request.getRequestURI()) %>" class="btn btn-primary btn-lg" role="button">Sign in »</a>
                     </p>
-   </div>
+    </div>
    
  
    </div>
@@ -293,50 +320,7 @@
     <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
+   
 
 </body>
-<script>
-map = new GMaps({
-    div: '#map',
-    lat: 42.0441447,
-    lng: -87.8533265,
-    width: '100%',
-    height: '400px'
-  });
-<%-- //[START datastore]--%>
-		<%
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		//Use class Query to assemble a query
-		Query q = new Query("Checkin");
-		
-		//Use PreparedQuery interface to retrieve results
-		PreparedQuery pq = datastore.prepare(q);
-			for (Entity result : pq.asIterable()) {
-			String author_id = (String) result.getProperty("author_id");
-			String healthstatus = (String) result.getProperty("healthstatus");
-			String latitude = (String) result.getProperty("latitude");
-			String longitude = (String) result.getProperty("longitude");
-			System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
-			%>
-			
-			map.addMarker({
-				  lat: <%=latitude%>,
-				  lng: <%=longitude%>,
-				  title: '<%=author_id%>',
-				  click: function(e) {
-				    alert('This is <%=author_id%>');
-				  },
-				  infoWindow: {
-					  content: '<p><%=author_id%></p>'
-				  }
-				});
-			<%
-			}
-			%>
-
-
-<%-- //[END datastore]--%>
-
-
-</script>
 </html>
