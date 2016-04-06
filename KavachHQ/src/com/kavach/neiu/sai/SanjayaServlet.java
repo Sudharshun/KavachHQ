@@ -36,7 +36,9 @@ public class SanjayaServlet extends HttpServlet {
   
    ObjectifyService.ofy().save().entity(messageToStore).now();
 	
-	resp.getWriter().println(responseTxt);
+	//resp.getWriter().println(responseTxt);
+ 	resp.sendRedirect("/confirmation.jsp?responseMsg=" + responseTxt);
+	
 	
 	}
 	

@@ -34,7 +34,8 @@ public class AswiniServlet extends HttpServlet {
   
    ObjectifyService.ofy().save().entity(checkin).now();
 	
-	resp.getWriter().println(responseTxt);
+	//resp.getWriter().println(responseTxt);
+   	resp.sendRedirect("/confirmation.jsp?responseMsg=" + responseTxt);
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
