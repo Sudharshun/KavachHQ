@@ -222,12 +222,6 @@
 								<form action="kavachhq/aswini/" method="post">
 								<div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Parameter</th>
-                                                <th>Value</th>
-                                            </tr>
-                                        </thead>
                                          <tbody>
                                         	<tr><td>Name of User:</td><td><input class="form-control" type="text" name="username" id="username" value="<%=user.getNickname()%>"></td></tr>
 										    <tr><td>Latitude:</td><td><input class="form-control" type="text" name ="latitude" id="latitude" value=""></td></tr>

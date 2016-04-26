@@ -166,13 +166,7 @@
 								<form action="kavachhq/sanjaya/" method="post">
 								<div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Parameter</th>
-                                                <th>Value</th>
-                                            </tr>
-                                        </thead>
-                                         <tbody>
+                                          <tbody>
                                         	<tr><td>Message From:</td><td><input class="form-control" type="text" name="messagefrom" id="messagefrom" value="<%=user.getNickname()%>"></td></tr>
 										    <tr><td>Content:</td><td><input class="form-control" type="text" name ="messagecontent" id="messagecontent" value=""></td></tr>
 								  			<tr><td>Message For:</td><td><input class="form-control" type="text" name="messagefor" id="messagefor" value=""></td></tr>

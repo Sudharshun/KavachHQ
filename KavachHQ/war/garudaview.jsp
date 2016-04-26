@@ -258,10 +258,10 @@
 											System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
 											%>
 											  <tr  class="clickable-row" data-url="dhanvantri.jsp?injuryCd=<%=healthstatus%>">
-                                                <td><%=author_id %></td>
+                                                <td><a href="#"><u><%=author_id %></u></a></td>
                                                 <td><%=latitude %></td>
                                                 <td><%=longitude %></td>
-                                                <td><%=healthstatus%></td>
+                                                <td><a href="#"><u><%=healthstatus%></u></a></td>
                                             </tr>
 											<%
 											}
