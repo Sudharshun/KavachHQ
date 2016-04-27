@@ -19,6 +19,8 @@
 <%-- //[END imports]--%>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="en">
@@ -244,6 +246,7 @@
                                                 <th>Cop</th>
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
+                                                <th>Date</th>
                                                 <th>Health Status</th>
                                             </tr>
                                         </thead>
@@ -255,13 +258,33 @@
 											String healthstatus = (String) result.getProperty("healthstatus");
 											String latitude = (String) result.getProperty("latitude");
 											String longitude = (String) result.getProperty("longitude");
+											Date timeStampNow=(Date)result.getProperty("date");
+											String timeStampFormatted ="";
+											if(null!=timeStampNow){
+											timeStampFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timeStampNow);
+											}
+											String healthstatustxt="SAFE";
+											
+											if(healthstatus.equalsIgnoreCase("4")){
+												healthstatustxt="HEAD";
+											}else if(healthstatus.equalsIgnoreCase("5")){
+												healthstatustxt="NECK";
+											}else if(healthstatus.equalsIgnoreCase("6")){
+												healthstatustxt="CHEST";
+											}else if(healthstatus.equalsIgnoreCase("7")){
+												healthstatustxt="STOMACH";
+											}else if(healthstatus.equalsIgnoreCase("8")){
+												healthstatustxt="TORSO";
+											}
+											
 											System.out.println("-->"+author_id + "," + healthstatus + "," + latitude +"," + longitude);
 											%>
-											  <tr  class="clickable-row" data-url="dhanvantri.jsp?injuryCd=<%=healthstatus%>">
+											  <tr  class="clickable-row" data-url="dhanvantri.jsp?injuryCd=<%=healthstatustxt%>">
                                                 <td><a href="#"><u><%=author_id %></u></a></td>
                                                 <td><%=latitude %></td>
                                                 <td><%=longitude %></td>
-                                                <td><a href="#"><u><%=healthstatus%></u></a></td>
+                                                <td><%=timeStampFormatted %></td>
+                                                <td><a href="#"><u><%=healthstatustxt%></u></a></td>
                                             </tr>
 											<%
 											}

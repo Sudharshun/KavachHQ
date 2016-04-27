@@ -1,5 +1,7 @@
 package com.kavach.neiu.sai;
 
+import java.util.Date;
+
 import org.mortbay.log.Log;
 
 import com.google.api.server.spi.config.Api;
@@ -45,22 +47,25 @@ public Container putThing(@Named("aid") String authorid, @Named("aemail") String
 @Named("lat") String latitude,@Named("longt") String longitude){
  Container c = new Container();
 //Get the Datastore Service
+ 
+ if(null!=healthstatus&&!healthstatus.trim().equalsIgnoreCase("")){
 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
+Date dateNow=new Date();
  Entity newCheckin = new Entity("Checkin");
  newCheckin.setProperty("author_id", authorid);
  newCheckin.setProperty("author_email", email);
  newCheckin.setProperty("healthstatus", healthstatus);
  newCheckin.setProperty("latitude", latitude);
  newCheckin.setProperty("longitude", longitude);
+ newCheckin.setProperty("date", dateNow);
  datastore.put(newCheckin);
  Key insertedKey = newCheckin.getKey();
  c.Text = "Successfully Inserted:"+insertedKey.getId();
+ }
  System.out.println("Insert Successfull");
+ 
  return c;
 }
-
-
 
 
 

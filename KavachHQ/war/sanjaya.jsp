@@ -168,8 +168,18 @@
                                     <table class="table table-bordered table-hover table-striped">
                                           <tbody>
                                         	<tr><td>Message From:</td><td><input class="form-control" type="text" name="messagefrom" id="messagefrom" value="<%=user.getNickname()%>"></td></tr>
-										    <tr><td>Content:</td><td><input class="form-control" type="text" name ="messagecontent" id="messagecontent" value=""></td></tr>
-								  			<tr><td>Message For:</td><td><input class="form-control" type="text" name="messagefor" id="messagefor" value=""></td></tr>
+										    <!--  <tr><td>Content:</td><td><input class="form-control" type="text" name ="messagecontent" id="messagecontent" value=""></td></tr>-->
+										    <tr><td>Content:</td><td><textarea class="form-control" rows="5" name ="messagecontent" id="messagecontent"></textarea></td></tr>
+								  			<!-- <tr><td>Message For:</td><td><input class="form-control" type="text" name="messagefor" id="messagefor" value=""></td></tr> -->
+								  			<tr><td>Message For:</td><td><select class="form-control" id="messagefor" name="messagefor">
+    										<option>Sudharshun</option>
+    										<option>Vaidehi</option>
+    										<option>Manasvini</option>
+   											<option>Xiwei Wang</option>
+   											<option>Peter Kimmel</option>
+   											<option>James Albright</option>
+   											<option>Nilanjan</option>
+ 											 </select></td></tr>	
 								 			<tr><td colspan="2"><div><button type="submit"  class="btn btn-primary">Inform</button></div></td></tr>
 								    	 </tbody>
                                     </table>
